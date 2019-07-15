@@ -33,9 +33,9 @@ weatherConditions.onload = function() {
 
 
 // GET THE FORECARST
-//weatherForecast.open('', '', true);
+weatherForecast.open('', '', true);
 weatherForecast.responseType = 'text'; 
-//weatherForecast.send();
+weatherForecast.send();
 
 weatherForecast.onload = function() {
 if (weatherForecast.status === 200){
