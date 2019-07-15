@@ -14,7 +14,7 @@ weatherConditions.send(null);
 weatherConditions.onload = function() {
     if (weatherConditions.status === 200){
         cObj = JSON.parse(weatherConditions.responseText); 
-        console.log(cObj);
+        //console.log(cObj);
         document.getElementById('location').innerHTML = cObj.name;
         document.getElementById('weather').innerHTML = cObj.weather[0].description;
         document.getElementById('temperature').innerHTML = cObj.main.temp;
@@ -33,7 +33,7 @@ weatherConditions.onload = function() {
 
 
 // GET THE FORECARST
-weatherForecast.open('', '', true);
+weatherForecast.open('GET', 'http://api.openweathermap.org/data/2.5/forecast?zip=94040,us&appid=fb3abc5ee9cb003e2111862ae5964391&units=imperial', true);
 weatherForecast.responseType = 'text'; 
 weatherForecast.send();
 
@@ -41,6 +41,27 @@ weatherForecast.onload = function() {
 if (weatherForecast.status === 200){
 	fObj = JSON.parse(weatherForecast.responseText);
 	console.log(fObj);
+    document.getElementById('r1c1').innerHTML = fObj.list[0].dt_txt;
+    var iconcode = fObj.list[0].weather[0].icon;
+    var icon_path = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    document.getElementById('r1c2').src = icon_path;
+    document.getElementById('r1c3').innerHTML = fObj.list[0].main.temp_min + "&deg;";
+    document.getElementById('r1c4').innerHTML = fObj.list[0].main.temp_max +  "&deg;";
+  
+    document.getElementById('r2c1').innerHTML = fObj.list[8].dt_txt;
+    var iconcode = fObj.list[8].weather[0].icon;
+    var icon_path = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    document.getElementById('r2c2').src = icon_path;
+    document.getElementById('r2c3').innerHTML = fObj.list[8].main.temp_min + "&deg;";
+    document.getElementById('r2c4').innerHTML = fObj.list[8].main.temp_max +  "&deg;";
+  
+    document.getElementById('r3c1').innerHTML = fObj.list[16].dt_txt;
+    var iconcode = fObj.list[16].weather[0].icon;
+    var icon_path = "http://openweathermap.org/img/w/" + iconcode + ".png";
+    document.getElementById('r3c2').src = icon_path;
+    document.getElementById('r3c3').innerHTML = fObj.list[16].main.temp_min + "&deg;";
+    document.getElementById('r3c4').innerHTML = fObj.list[16].main.temp_max +  "&deg;";
+	
 	
 } //end if
 }; //end function
